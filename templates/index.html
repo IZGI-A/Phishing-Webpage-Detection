@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML File Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Phishing Check for HTML File</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="htmlFile">Select the HTML File for Identification:</label>
+        <input type="file" id="htmlFile" name="htmlFile" accept=".html">
+        <button type="button" onclick="predict()">Predict</button>
+    </form>
+
+    <div id="result" style="margin-top: 20px;"></div>
+
+    <script>
+        function predict() {
+            var fileInput = document.getElementById('htmlFile');
+            var file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select an HTML file.');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('htmlFile', file);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/predict', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '<p><strong>Prediction result:</strong> ' + xhr.responseText + '</p>';
+                }
+            };
+
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>
