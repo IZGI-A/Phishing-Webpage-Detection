@@ -1,4 +1,4 @@
-## Phishing Webpage Detection via Machine Learning and Natual Language Processing Features
+## Phishing Webpage Detection via Machine Learning and Natural Language Processing Features
 
 ### Model Performance Table
 
